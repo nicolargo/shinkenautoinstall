@@ -1,0 +1,6 @@
+Dans le petit monde des systèmes de supervision système et réseau, un nouveau venu pointe le bout de sa... lame: Shinken.
+Développé de main de maître par Jean Gabes (un des spécialiste Français de Nagios), il en reprend la structure au niveau des fichiers de configuration tout en apportant de plus grandes des performances, le tout distribué sous une licence libre AGPL v3. Basée sur le langage Python, il offre une liste pour le moins  impressionnante de fonctions que vous pouvez consultez sur cette page.
+Nous allons dans ce premier billet sur le sujet, détailler un script d'installation automatique du couple Shinken + Thruk (interface Web) sur une distribution GNU/Linux Debian (le script doit également fonctionner sur une distribution Ubuntu moyennant, peut être, quelques modifications, notamment l'édition des lignes arch_version et perl_version).
+
+Syntaxe:
+sudo ./shinkenautoinstall-debian.sh
