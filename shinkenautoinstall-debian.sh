@@ -21,7 +21,7 @@
 #   Installation de Shinken 0.5.5
 #   Installation de Thruk 0.90
 #
-script_version="0.41"
+script_version="0.42"
 
 ### Can be modified
 shinken_version="0.6"				#
@@ -119,7 +119,7 @@ installation() {
   wget http://svn.nicolargo.com/shinkenautoinstall/trunk/thruk_local.conf
   cd ..
   mkdir /opt/thruk
-  cp -R Thruk-$thruk_version /opt/thruk
+  cp -R Thruk-$thruk_version/* /opt/thruk
   chown -R shinken:shinken /opt/thruk
 
   echo "----------------------------------------------------"
