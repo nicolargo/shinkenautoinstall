@@ -21,7 +21,7 @@
 #   Installation de Shinken 0.5.5
 #   Installation de Thruk 0.90
 #
-script_version="0.4"
+script_version="0.41"
 
 ### Can be modified
 shinken_version="0.6"				#
@@ -57,9 +57,7 @@ installation() {
   aptitude install python-dev python-setuptools pyro wget libgd2-xpm-dev
   cd ~/$0.$DATE
   wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
-  if [ $? ]; then
-  	echo "Download multiprocessing version $multiprocessing_version [OK]"
-  else
+  if [ "$?" -ne "0" ]; then
   	echo "Download Shinken version $multiprocessing_version [ERROR]"
   	exit 1 
   fi
@@ -81,21 +79,15 @@ installation() {
   echo "----------------------------------------------------"
   cd ~/$0.$DATE
   wget http://shinken-monitoring.org/pub/shinken-$shinken_version.tar.gz 
-  if [ $? ]; then
-  	echo "Download Shinken version $shinken_version [OK]"
-  else
+  if [ "$?" -ne "0" ]; then
   	echo "Download Shinken version $shinken_version [ERROR]"
   	exit 1 
   fi
   wget http://www.thruk.org/files/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
-  if [ $? ]; then
-  	echo "Download Thruk version $thruk_version [OK]"
-  else
+  if [ "$?" -ne "0" ]; then
   	echo "Try another mirror for Thruk (archives)..."
   	wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
-	if [ $? ]; then
-	  echo "Download Thruk version $shinken_version [OK]"
-	else
+  if [ "$?" -ne "0" ]; then
 	  echo "Download Thruk version $shinken_version [ERROR]"
 	  exit 1 
 	fi
