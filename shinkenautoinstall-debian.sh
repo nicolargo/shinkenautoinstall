@@ -21,7 +21,7 @@
 #   Installation de Shinken 0.5.5
 #   Installation de Thruk 0.90
 #
-script_version="0.42"
+script_version="0.43"
 
 ### Can be modified
 shinken_version="0.6"				#
@@ -113,6 +113,7 @@ installation() {
   tar zxvf shinken-$shinken_version.tar.gz
   cd shinken-$shinken_version
   python setup.py install --install-scripts=/usr/bin/  
+  cp libexec/* /usr/lib/nagios/plugins/
   cd ~/$0.$DATE
   tar zxvf Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
   cd Thruk-$thruk_version
