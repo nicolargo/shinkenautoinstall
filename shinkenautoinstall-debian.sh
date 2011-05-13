@@ -21,7 +21,7 @@
 #   Installation de Shinken 0.5.5
 #   Installation de Thruk 0.90
 #
-script_version="0.43"
+script_version="0.44"
 
 ### Can be modified
 shinken_version="0.6"				#
@@ -51,10 +51,10 @@ installation() {
   # Pre-requisite
   echo "----------------------------------------------------"
   echo "Installation pre-requisites"
-  echo " * python-dev python-setuptools pyro wget libgd2-xpm-dev"
+  echo " * python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
   echo " * multiprocessing version $multiprocessing_version"
   echo "----------------------------------------------------"
-  aptitude install python-dev python-setuptools pyro wget libgd2-xpm-dev
+  aptitude install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
   cd ~/$0.$DATE
   wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   if [ "$?" -ne "0" ]; then
