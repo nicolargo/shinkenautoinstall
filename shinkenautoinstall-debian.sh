@@ -26,7 +26,9 @@ script_version="0.44"
 ### Can be modified
 shinken_version="0.6"				#
 thruk_version="1.0.2"				#
-arch_version="`arch`" 				# i386 | i486 | x86_64
+arch_version="`uname -m`" 				# i386 | i486 | x86_64
+ # uname -m is better because it's well spread and arch only appear in ubuntu...
+
 perl_version="5.10.0" 				# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"	#
 ### /Can be modified
