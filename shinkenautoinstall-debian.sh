@@ -8,12 +8,12 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.45"
+script_version="0.46"
 
 ### Can be modified
 shinken_version="0.6"				#
 thruk_version="1.0.3"				#
-arch_version="`uname -m`" 			# i386 | i486 | x86_64
+arch_version="`uname -m`" 			# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 				# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"		#
 ### /Can be modified
@@ -75,7 +75,7 @@ installation() {
   	echo "Try another mirror for Thruk (archives)..."
   	wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
   if [ "$?" -ne "0" ]; then
-	  echo "Download Thruk version $shinken_version [ERROR]"
+	  echo "Download Thruk version $thruk_version [ERROR]"
 	  exit 1 
 	fi
   fi
