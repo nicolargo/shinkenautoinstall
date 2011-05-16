@@ -7,28 +7,15 @@
 #
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
-# Version 0.4
-#   MaJ de Thruk en 1.0.2
 #
-# Version 0.3
-#   MaJ de Thruk en 1.0.1
-#
-# Version 0.2
-#   MaJ de Shinken 0.6
-#   MaJ de Thruk 0.94.4
-#
-# Version 0.1:
-#   Installation de Shinken 0.5.5
-#   Installation de Thruk 0.90
-#
-script_version="0.44"
+script_version="0.45"
 
 ### Can be modified
 shinken_version="0.6"				#
-thruk_version="1.0.2"				#
-arch_version="`arch`" 				# i386 | i486 | x86_64
+thruk_version="1.0.3"				#
+arch_version="`uname -a`" 			# i386 | i486 | x86_64
 perl_version="5.10.0" 				# `perl -e 'use Config; print $Config{version}'`
-multiprocessing_version="2.6.2.1"	#
+multiprocessing_version="2.6.2.1"		#
 ### /Can be modified
 
 DATE=`date +"%Y%m%d%H%M%S"`

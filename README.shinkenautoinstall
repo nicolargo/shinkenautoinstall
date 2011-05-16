@@ -1,6 +1,34 @@
-Dans le petit monde des systèmes de supervision système et réseau, un nouveau venu pointe le bout de sa... lame: Shinken.
-Développé de main de maître par Jean Gabes (un des spécialiste Français de Nagios), il en reprend la structure au niveau des fichiers de configuration tout en apportant de plus grandes des performances, le tout distribué sous une licence libre AGPL v3. Basée sur le langage Python, il offre une liste pour le moins  impressionnante de fonctions que vous pouvez consultez sur cette page.
-Nous allons dans ce premier billet sur le sujet, détailler un script d'installation automatique du couple Shinken + Thruk (interface Web) sur une distribution GNU/Linux Debian (le script doit également fonctionner sur une distribution Ubuntu moyennant, peut être, quelques modifications, notamment l'édition des lignes arch_version et perl_version).
+Shinken/Thurk auto install
+==========================
 
-Syntaxe:
-sudo ./shinkenautoinstall-debian.sh
+This script aims at installating the latest versions of Shinken with the Thruk Web interface on your Debian (or Ubuntu) system.
+See more detail here: http://blog.nicolargo.com/2011/04/script-dinstallation-automatique-de-shinkenthruk.html
+
+Docs
+====
+
+As root:
+
+# ./shinkenautoinstall.sh
+
+Versions
+========
+
+Version 0.45
+	* Update to Thruk 1.0.3
+	* Replace `arch` by `uname -a`
+
+Version 0.41
+	* Update to Thruk 1.0.2
+	* Add controls during wget
+
+Version 0.3
+   	* Update to Thruk 1.0.1
+
+Version 0.2
+	* Update to Shinken 0.6
+	* Update to Thruk 0.94.4
+
+Version 0.1:
+	* Shinken 0.5.5
+	* Thruk 0.90
