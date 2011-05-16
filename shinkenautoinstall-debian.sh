@@ -13,7 +13,7 @@ script_version="0.45"
 ### Can be modified
 shinken_version="0.6"				#
 thruk_version="1.0.3"				#
-arch_version="`uname -a`" 			# i386 | i486 | x86_64
+arch_version="`uname -m`" 			# i386 | i486 | x86_64
 perl_version="5.10.0" 				# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"		#
 ### /Can be modified
