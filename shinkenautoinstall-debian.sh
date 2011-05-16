@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.46"
+script_version="0.47"
 
 ### Can be modified
 shinken_version="0.6"				#
@@ -17,6 +17,13 @@ arch_version="`uname -m`" 			# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 				# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"		#
 ### /Can be modified
+
+# Get the **good** architecture name for Thruk
+case $arch_version in
+  "i386"|"i686") 
+	arch_version="i486"
+	;;
+esac
 
 DATE=`date +"%Y%m%d%H%M%S"`
 BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
