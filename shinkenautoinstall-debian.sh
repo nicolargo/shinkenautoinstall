@@ -8,24 +8,25 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.47"
+script_version="0.49"
 
 ### Can be modified
-shinken_version="0.6"				#
-thruk_version="1.0.3"				#
-arch_version="`uname -m`" 			# May be change to: i386 | i486 | x86_64
-perl_version="5.10.0" 				# `perl -e 'use Config; print $Config{version}'`
-multiprocessing_version="2.6.2.1"		#
+shinken_version="0.6"
+thruk_version="1.0.3"
+arch_version="`uname -m`" 			    # May be change to: i386 | i486 | x86_64
+perl_version="5.10.0" 				      # `perl -e 'use Config; print $Config{version}'`
+multiprocessing_version="2.6.2.1"
 ### /Can be modified
 
 # Get the **good** architecture name for Thruk
 case $arch_version in
-  "i386"|"i686") 
+  "i386"|"i686")
 	arch_version="i486"
 	;;
 esac
 
 DATE=`date +"%Y%m%d%H%M%S"`
+TEMP_FOLDER="/tmp/shinkenautoinstall.$DATE"
 BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
 
 # Function: backup
@@ -40,7 +41,7 @@ backup() {
 # Function: installation
 installation() {
   # Create the temporary directory
-  mkdir ~/$0.$DATE
+  mkdir $TEMP_FOLDER
 
   # Pre-requisite
   echo "----------------------------------------------------"
@@ -49,11 +50,11 @@ installation() {
   echo " * multiprocessing version $multiprocessing_version"
   echo "----------------------------------------------------"
   aptitude install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
-  cd ~/$0.$DATE
+  cd $TEMP_FOLDER
   wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   if [ "$?" -ne "0" ]; then
   	echo "Download Shinken version $multiprocessing_version [ERROR]"
-  	exit 1 
+  	exit 1
   fi
   tar zxvf multiprocessing-$multiprocessing_version.tar.gz
   cd multiprocessing-$multiprocessing_version/
@@ -71,11 +72,11 @@ installation() {
   echo " * Shinken version $shinken_version"
   echo " * Thruk version $thruk_version"
   echo "----------------------------------------------------"
-  cd ~/$0.$DATE
-  wget http://shinken-monitoring.org/pub/shinken-$shinken_version.tar.gz 
+  cd $TEMP_FOLDER
+  wget http://shinken-monitoring.org/pub/shinken-$shinken_version.tar.gz
   if [ "$?" -ne "0" ]; then
   	echo "Download Shinken version $shinken_version [ERROR]"
-  	exit 1 
+  	exit 1
   fi
   wget http://www.thruk.org/files/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
   if [ "$?" -ne "0" ]; then
@@ -83,7 +84,7 @@ installation() {
   	wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
   if [ "$?" -ne "0" ]; then
 	  echo "Download Thruk version $thruk_version [ERROR]"
-	  exit 1 
+	  exit 1
 	fi
   fi
 
@@ -103,19 +104,26 @@ installation() {
   echo "----------------------------------------------------"
   echo "Configure, compile and install..."
   echo "----------------------------------------------------"
-  cd ~/$0.$DATE
+  cd $TEMP_FOLDER
   tar zxvf shinken-$shinken_version.tar.gz
   cd shinken-$shinken_version
-  python setup.py install --install-scripts=/usr/bin/  
+  python setup.py install --install-scripts=/usr/bin/
   cp libexec/* /usr/lib/nagios/plugins/
-  cd ~/$0.$DATE
+  cd $TEMP_FOLDER
   tar zxvf Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
   cd Thruk-$thruk_version
   wget http://svn.nicolargo.com/shinkenautoinstall/trunk/thruk_local.conf
-  cd ..
   mkdir /opt/thruk
-  cp -R Thruk-$thruk_version/* /opt/thruk
+  cp -R * /opt/thruk
   chown -R shinken:shinken /opt/thruk
+
+  echo "----------------------------------------------------"
+  echo "Hack for the i686 Linux GNU Thread Multi lib"
+  echo "Thanks to: Yann :) "
+  echo "----------------------------------------------------"
+  if [ -f /opt/thruk/local-lib/lib/perl5/i486-linux-gnu-thread-multi ]; then
+    ln -s /opt/thruk/local-lib/lib/perl5/i486-linux-gnu-thread-multi /opt/thruk/local-lib/lib/perl5/i686-linux-gnu-thread-multi
+  fi
 
   echo "----------------------------------------------------"
   echo "Hack the default Shinken startup script"
@@ -133,7 +141,7 @@ installation() {
   update-rc.d shinken defaults
   update-rc.d thruk defaults
 
-  rm -rf ~/$0.$DATE
+#  rm -rf $TEMP_FOLDER
 }
 
 # Fonction: Verifie si les fichiers de conf sont OK
@@ -142,7 +150,7 @@ check() {
   echo "Check the Shinken configuration"
   echo "----------------------------------------------------"
   python /usr/bin/shinken-arbiter -v -c /etc/shinken/nagios.cfg -c /etc/shinken/shinken-specific.cfg
-}   
+}
 
 # Fonction: Lancement de Shinken
 start() {
@@ -170,7 +178,7 @@ end() {
   echo "Installation is finished"
   echo "----------------------------------------------------"
   if [ -f $BACKUP_FILE ]; then
-  echo "Backup configuration file         : $BACKUP_FILE"     
+    echo "Backup configuration file         : $BACKUP_FILE"
   fi
   echo "Configuration file folder         : /etc/shinken"
   echo "Log file                          : /var/lib/shinken/nagios.log"
@@ -185,7 +193,7 @@ if [ "$(id -u)" != "0" ]; then
 	echo "Syntaxe: sudo $0"
 	exit 1
 fi
-if [ -d /etc/shinken ]; then	
+if [ -d /etc/shinken ]; then
     stop
     backup
 fi

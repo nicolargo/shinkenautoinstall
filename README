@@ -1,1 +1,40 @@
-README.shinkenautoinstall
+Shinken/Thurk auto install
+==========================
+
+This script aims at installating the latest versions of Shinken with the Thruk Web interface on your Debian (or Ubuntu) system.
+See more detail here: http://blog.nicolargo.com/2011/04/script-dinstallation-automatique-de-shinkenthruk.html
+
+Docs
+====
+
+As root:
+
+# ./shinkenautoinstall.sh
+
+Versions
+========
+
+Version 0.48
+	* Change working path to /tmp/shinken.$DATE
+
+Version 0.47
+	* Correct the script to download Thruk when architecture is i386 | i686
+
+Version 0.45
+	* Update to Thruk 1.0.3
+	* Replace `arch` by `uname -a`
+
+Version 0.41
+	* Update to Thruk 1.0.2
+	* Add controls during wget
+
+Version 0.3
+   	* Update to Thruk 1.0.1
+
+Version 0.2
+	* Update to Shinken 0.6
+	* Update to Thruk 0.94.4
+
+Version 0.1:
+	* Shinken 0.5.5
+	* Thruk 0.90

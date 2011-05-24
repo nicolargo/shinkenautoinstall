@@ -14,6 +14,9 @@ As root:
 Versions
 ========
 
+Version 0.48
+	* Change working path to /tmp/shinken.$DATE
+
 Version 0.47
 	* Correct the script to download Thruk when architecture is i386 | i686
 
