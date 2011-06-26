@@ -8,11 +8,11 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.49"
+script_version="0.60"
 
 ### Can be modified
-shinken_version="0.6"
-thruk_version="1.0.3"
+shinken_version="0.6.5"
+thruk_version="1.0.5"
 arch_version="`uname -m`" 			    # May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 				      # `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"
@@ -32,7 +32,7 @@ BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
 # Function: backup
 backup() {
   echo "----------------------------------------------------"
-  echo "Backup the current configuration"
+  echo "Backup the current configuration in $BACKUP_FILE"
   echo "----------------------------------------------------"
   echo ""
   tar zcvf $BACKUP_FILE /etc/shinken
@@ -45,11 +45,11 @@ installation() {
 
   # Pre-requisite
   echo "----------------------------------------------------"
-  echo "Installation pre-requisites"
+  echo "Installation pre-requisites:"
   echo " * python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
   echo " * multiprocessing version $multiprocessing_version"
   echo "----------------------------------------------------"
-  aptitude install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
+  apt-get install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
   cd $TEMP_FOLDER
   wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   if [ "$?" -ne "0" ]; then
@@ -68,7 +68,7 @@ installation() {
 
   # Download sources
   echo "----------------------------------------------------"
-  echo "Download sources"
+  echo "Download sources:"
   echo " * Shinken version $shinken_version"
   echo " * Thruk version $thruk_version"
   echo "----------------------------------------------------"
@@ -82,7 +82,7 @@ installation() {
   if [ "$?" -ne "0" ]; then
   	echo "Try another mirror for Thruk (archives)..."
   	wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
-  if [ "$?" -ne "0" ]; then
+  	if [ "$?" -ne "0" ]; then
 	  echo "Download Thruk version $thruk_version [ERROR]"
 	  exit 1
 	fi
@@ -95,14 +95,14 @@ installation() {
     echo "Creation utilisateur shinken et groupe shinken"
     echo "----------------------------------------------------"
     useradd -s /bin/noshellneeded shinken
-    echo "Fixer un mot de passe pour l'utilisateur shinken"
+    echo "Set a password for the system shinken user account:"
     passwd shinken
     usermod -G shinken shinken
   fi
 
   # Installation
   echo "----------------------------------------------------"
-  echo "Configure, compile and install..."
+  echo "Configure, Compile and Install..."
   echo "----------------------------------------------------"
   cd $TEMP_FOLDER
   tar zxvf shinken-$shinken_version.tar.gz
@@ -136,18 +136,18 @@ installation() {
   chmod a+rx /etc/init.d/thruk
 
   echo "----------------------------------------------------"
-  echo "Start Shinken and Thruk on boot"
+  echo "Configure to automaticaly start Shinken and Thruk"
   echo "----------------------------------------------------"
   update-rc.d shinken defaults
   update-rc.d thruk defaults
 
-#  rm -rf $TEMP_FOLDER
+  rm -rf $TEMP_FOLDER
 }
 
 # Fonction: Verifie si les fichiers de conf sont OK
 check() {
   echo "----------------------------------------------------"
-  echo "Check the Shinken configuration"
+  echo "Check the Shinken configurations files"
   echo "----------------------------------------------------"
   python /usr/bin/shinken-arbiter -v -c /etc/shinken/nagios.cfg -c /etc/shinken/shinken-specific.cfg
 }
