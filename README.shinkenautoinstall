@@ -3,6 +3,7 @@ Shinken/Thurk auto install
 
 This script aims at installating the latest versions of Shinken with the Thruk Web interface on your Debian (or Ubuntu) system.
 See more detail here: http://blog.nicolargo.com/2011/04/script-dinstallation-automatique-de-shinkenthruk.html
+Screen-shot: http://desmond.yfrog.com/Himg610/scaled.php?tn=0&server=610&filename=0vp4.png&xsize=640&ysize=640
 
 Docs
 ====
