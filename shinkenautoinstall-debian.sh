@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.61"
+script_version="0.62"
 
 #=============================================================================
 ### Can be modified
@@ -93,7 +93,7 @@ installation() {
   # Pre-requisite
   # python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
   # multiprocessing version $multiprocessing_version
-  displayandexec "Install wget, nagios plugins and librairies" apt-get install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
+  displayandexec "Install wget, nagios plugins and librairies" apt-get -y install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
   cd $TEMP_FOLDER
   displayandexec "Download Multiprocessing v$multiprocessing_version" wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   displayandexec "Untar Multiprocessing v$multiprocessing_version"  tar zxvf multiprocessing-$multiprocessing_version.tar.gz
@@ -133,7 +133,7 @@ installation() {
   displayandexec "Untar Thruk v$thruk_version for $arch_version" tar zxvf Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
   cd Thruk-$thruk_version
   rm -f thruk_local.conf
-  displayandexec "Download the default Thruk configuration for Shinken" wget https://raw.github.com/nicolargo/shinkenautoinstall/master/thruk_local.conf
+  displayandexec "Download the default Thruk configuration for Shinken" wget --no-check-certificate https://raw.github.com/nicolargo/shinkenautoinstall/master/thruk_local.conf
   if [ ! -d /opt/thruk ]; then
     mkdir /opt/thruk
   else
