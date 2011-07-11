@@ -8,12 +8,12 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.62"
+script_version="0.63"
 
 #=============================================================================
 ### Can be modified
 shinken_version="0.6.5"
-thruk_version="1.0.6"
+thruk_version="1.0.7"
 arch_version="`uname -m`" 		# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 			# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"
@@ -31,6 +31,8 @@ case $arch_version in
 esac
 
 DATE=`date +"%Y%m%d%H%M%S"`
+CMD_APT="/usr/bin/apt-get -y"
+
 TEMP_FOLDER="/tmp/shinkenautoinstall.$DATE"
 BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
 LOG_FILE="/tmp/shinkenautoinstall-$DATE.log"
@@ -93,7 +95,7 @@ installation() {
   # Pre-requisite
   # python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
   # multiprocessing version $multiprocessing_version
-  displayandexec "Install wget, nagios plugins and librairies" apt-get -y install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
+  displayandexec "Install wget, nagios plugins and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
   cd $TEMP_FOLDER
   displayandexec "Download Multiprocessing v$multiprocessing_version" wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   displayandexec "Untar Multiprocessing v$multiprocessing_version"  tar zxvf multiprocessing-$multiprocessing_version.tar.gz
