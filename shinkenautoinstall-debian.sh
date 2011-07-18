@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.63"
+script_version="0.64"
 
 #=============================================================================
 ### Can be modified
@@ -31,7 +31,7 @@ case $arch_version in
 esac
 
 DATE=`date +"%Y%m%d%H%M%S"`
-CMD_APT="/usr/bin/apt-get -y"
+CMD_APT="/usr/bin/apt-get -y --force-yes"
 
 TEMP_FOLDER="/tmp/shinkenautoinstall.$DATE"
 BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
