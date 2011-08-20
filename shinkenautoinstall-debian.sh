@@ -8,12 +8,12 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.64"
+script_version="0.65"
 
 #=============================================================================
 ### Can be modified
 shinken_version="0.6.5"
-thruk_version="1.0.7"
+thruk_version="1.0.8"
 arch_version="`uname -m`" 		# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 			# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"
@@ -155,7 +155,7 @@ installation() {
   sed -i 's/BIN="\/usr\/local\/shinken\/bin"/BIN="\/usr\/bin"/g' /etc/init.d/shinken
   sed -i 's/VAR="\/usr\/local\/shinken\/var"/VAR="\/var\/lib\/shinken"/g' /etc/init.d/shinken
   sed -i 's/ETC="\/usr\/local\/shinken\/etc"/ETC="\/etc\/shinken"/g' /etc/init.d/shinken
-  displayandexec "Download startup scripts" wget -O /etc/init.d/thruk https://raw.github.com/nicolargo/shinkenautoinstall/master/thruk
+  displayandexec "Download startup scripts" wget --no-check-certificate -O /etc/init.d/thruk https://raw.github.com/nicolargo/shinkenautoinstall/master/thruk
   chown root:root /etc/init.d/thruk
   chmod a+rx /etc/init.d/thruk
   displayandexec "Install Shinken startup script" update-rc.d shinken defaults
