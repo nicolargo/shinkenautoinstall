@@ -95,7 +95,7 @@ installation() {
   # Pre-requisite
   # python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
   # multiprocessing version $multiprocessing_version
-  displayandexec "Install wget, nagios plugins and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev
+  displayandexec "Install wget and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev
   cd $TEMP_FOLDER
   displayandexec "Download Multiprocessing v$multiprocessing_version" wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   displayandexec "Untar Multiprocessing v$multiprocessing_version"  tar zxvf multiprocessing-$multiprocessing_version.tar.gz
