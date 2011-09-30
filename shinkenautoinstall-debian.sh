@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.65111"
+script_version="0.651112"
 
 #=============================================================================
 ### Can be modified
@@ -31,7 +31,7 @@ case $arch_version in
 esac
 
 DATE=`date +"%Y%m%d%H%M%S"`
-CMD_APT="/usr/bin/apt-get -y --force-yes"
+CMD_APT="/usr/bin/apt-get --force-yes --yes"
 
 TEMP_FOLDER="/tmp/shinkenautoinstall.$DATE"
 BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
@@ -95,7 +95,7 @@ installation() {
   # Pre-requisite
   # python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
   # multiprocessing version $multiprocessing_version
-  displayandexec "Install wget, nagios plugins and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins
+  displayandexec "Install wget, nagios plugins and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev
   cd $TEMP_FOLDER
   displayandexec "Download Multiprocessing v$multiprocessing_version" wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   displayandexec "Untar Multiprocessing v$multiprocessing_version"  tar zxvf multiprocessing-$multiprocessing_version.tar.gz
@@ -219,6 +219,8 @@ if [ -d /etc/shinken ]; then
 fi
 displaytitle "-- Installation"
 installation
+displaytitle "-- Install Nagios Plugin (interactive)"
+$CMD_APT install nagios-plugins
 displaytitle "-- Start current Shinken and Thruk process"
 start
 end
