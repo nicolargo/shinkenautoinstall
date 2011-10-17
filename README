@@ -15,6 +15,10 @@ As root:
 Versions
 ========
 
+Version 0.81112
+	* Shinken 0.8
+	* Add link to the Shinken WebUI
+
 Version 0.65111
 	* Shinken 0.6.5
 	* Thruk 1.1.1
