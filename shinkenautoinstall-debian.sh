@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.81113"
+script_version="0.8.1-4"
 
 #=============================================================================
 ### Can be modified
@@ -166,8 +166,8 @@ installation() {
 
 # Fonction: Verifie si les fichiers de conf sont OK
 check() {
-  sleep 2
-  displayandexec "Check the Shinken configurations files" /usr/bin/shinken-arbiter -v -c /etc/shinken/nagios.cfg -c /etc/shinken/shinken-specific.cfg
+  rm -f /tmp/shinken_checkconfig_result
+  displayandexec "Check the Shinken configurations files" /etc/init.d/shinken check
 }
 
 # Fonction: Lancement de Shinken
@@ -193,13 +193,14 @@ end() {
   if [ -f $BACKUP_FILE ]; then
     echo "Backup configuration file         : $BACKUP_FILE"
   fi
-  echo "Log for the installation script   : $LOG_FILE"
   echo "Configuration file folder         : /etc/shinken"
   echo "Log file                          : /var/lib/shinken/nagios.log"
   echo "Shinken startup script            : /etc/init.d/shinken"
   echo "Shinken web interface URL         : http://`hostname`:7767"
   echo "Thruk startup script              : /etc/init.d/thruk"
   echo "Thruk web interface URL           : http://`hostname`:3000"
+  echo "Log for the installation script   : $LOG_FILE"
+  echo "Log for the Shinken config check  : /tmp/shinken_checkconfig_result"
   echo "=============================================================================="
   echo ""
 }
@@ -222,7 +223,9 @@ displaytitle "-- Installation"
 installation
 displaytitle "-- Install Nagios Plugin (interactive)"
 $CMD_APT install nagios-plugins
-displaytitle "-- Start current Shinken and Thruk process"
+displaytitle "-- Check the Shinken configuration files"
+check
+displaytitle "-- Start Shinken and Thruk processes"
 start
 end
 

@@ -8,12 +8,27 @@ Screen-shot: http://desmond.yfrog.com/Himg610/scaled.php?tn=0&server=610&filenam
 Docs
 ====
 
+Download:
+
+# rm -f shinkenautoinstall-debian.sh
+# wget --no-check-certificate https://raw.github.com/nicolargo/shinkenautoinstall/master/shinkenautoinstall-debian.sh
+# chmod a+x shinkenautoinstall-debian.sh
+
+En execute:
 As root:
 
 # ./shinkenautoinstall.sh
 
+Or has an allowed sudo user:
+
+# sudo ./shinkenautoinstall.sh
+
 Versions
 ========
+
+Version 0.8.1-4
+	* Use the init script to check the Shinken configuration
+	* The script version follows the Shinken one
 
 Version 0.81113
 	* Shinken 0.8.1
