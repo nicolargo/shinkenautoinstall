@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.8.1-4"
+script_version="0.8.1-5"
 
 #=============================================================================
 ### Can be modified
@@ -196,9 +196,9 @@ end() {
   echo "Configuration file folder         : /etc/shinken"
   echo "Log file                          : /var/lib/shinken/nagios.log"
   echo "Shinken startup script            : /etc/init.d/shinken"
-  echo "Shinken web interface URL         : http://`hostname`:7767"
+  echo "Shinken web interface URL         : http://`hostname --fqdn`:7767"
   echo "Thruk startup script              : /etc/init.d/thruk"
-  echo "Thruk web interface URL           : http://`hostname`:3000"
+  echo "Thruk web interface URL           : http://`hostname --fqdn`:3000"
   echo "Log for the installation script   : $LOG_FILE"
   echo "Log for the Shinken config check  : /tmp/shinken_checkconfig_result"
   echo "=============================================================================="
