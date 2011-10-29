@@ -26,9 +26,10 @@ Or has an allowed sudo user:
 Versions
 ========
 
-Version 0.8.1-4
+Version 0.8.1-5
 	* Use the init script to check the Shinken configuration
 	* The script version follows the Shinken one
+	* Use hostname --fqdn
 
 Version 0.81113
 	* Shinken 0.8.1
