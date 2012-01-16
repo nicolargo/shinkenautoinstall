@@ -26,6 +26,10 @@ Or has an allowed sudo user:
 Versions
 ========
 
+Version 0.8.1-7
+        * Shinken 0.8.1
+        * Thruk 1.1.7
+
 Version 0.8.1-5
 	* Use the init script to check the Shinken configuration
 	* The script version follows the Shinken one

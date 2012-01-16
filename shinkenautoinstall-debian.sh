@@ -8,12 +8,12 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.8.1-6"
+script_version="0.8.1-7"
 
 #=============================================================================
 ### Can be modified
 shinken_version="0.8.1"
-thruk_version="1.1.5"
+thruk_version="1.1.7"
 arch_version="`uname -m`" 		# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 			# `perl -e 'use Config; print $Config{version}'`
 multiprocessing_version="2.6.2.1"
