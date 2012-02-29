@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="1.0.0-2"
+script_version="1.0.0-3"
 
 #=============================================================================
 ### Can be modified
@@ -89,6 +89,11 @@ backup() {
 
 # Function: installation
 installation() {
+  # Install the Nagios Plugins
+  echo "Nagios Plugins installation (start in 3 seconds)..."
+  sleep 3
+  $CMD_APT install nagios-plugins
+
   # Create the temporary directory
   mkdir $TEMP_FOLDER
 
@@ -96,7 +101,7 @@ installation() {
   displayandexec "Update the system" $CMD_APT update
 
   # Pre-requisite
-  # python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
+  # python-dev python-setuptools pyro wget libgd2-xpm-dev
   # multiprocessing version $multiprocessing_version
   displayandexec "Install wget and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev
   cd $TEMP_FOLDER
