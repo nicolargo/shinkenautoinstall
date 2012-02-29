@@ -8,11 +8,11 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.8.1-7"
+script_version="0.8.5-1"
 
 #=============================================================================
 ### Can be modified
-shinken_version="0.8.1"
+shinken_version="0.8.5"
 thruk_version="1.1.7"
 arch_version="`uname -m`" 		# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 			# `perl -e 'use Config; print $Config{version}'`
@@ -91,6 +91,9 @@ backup() {
 installation() {
   # Create the temporary directory
   mkdir $TEMP_FOLDER
+
+  # Update the system
+  displayandexec "Update the system" $CMD_APT update
 
   # Pre-requisite
   # python-dev python-setuptools pyro wget libgd2-xpm-dev nagios-plugins"
