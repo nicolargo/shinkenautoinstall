@@ -31,7 +31,7 @@ case $arch_version in
 esac
 
 DATE=`date +"%Y%m%d%H%M%S"`
-CMD_APT="DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get --force-yes --yes"
+CMD_APT="/usr/bin/apt-get --force-yes --yes"
 
 TEMP_FOLDER="/tmp/shinkenautoinstall.$DATE"
 BACKUP_FILE="/tmp/shinken-backup-$DATE.tgz"
