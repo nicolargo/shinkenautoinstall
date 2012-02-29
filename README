@@ -26,6 +26,10 @@ Or has an allowed sudo user:
 Versions
 ========
 
+Version 1.0.0-1
+        * Shinken 1.0
+        * Thruk 1.1.7
+
 Version 0.8.5-1
         * Shinken 0.8.5
         * Thruk 1.1.7

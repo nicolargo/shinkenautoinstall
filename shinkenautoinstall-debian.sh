@@ -8,11 +8,11 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="0.8.5-1"
+script_version="1.0.0-1"
 
 #=============================================================================
 ### Can be modified
-shinken_version="0.8.5"
+shinken_version="1.0"
 thruk_version="1.1.7"
 arch_version="`uname -m`" 		# May be change to: i386 | i486 | x86_64
 perl_version="5.10.0" 			# `perl -e 'use Config; print $Config{version}'`
@@ -114,10 +114,7 @@ installation() {
   # Download sources
   cd $TEMP_FOLDER
   displayandexec "Download Shinken version $shinken_version" wget http://shinken-monitoring.org/pub/shinken-$shinken_version.tar.gz
-  displayandexec "Download Thruk version $thruk_version" wget http://www.thruk.org/files/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
-  if [ "$?" -ne "0" ]; then
-  	displayandexec "Try another mirror for Thruk..." wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
-  fi
+  displayandexec "Download Thruk version $thruk_version" wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
 
   # Create shinken user and group
   if [ ! `id -u shinken` ]
