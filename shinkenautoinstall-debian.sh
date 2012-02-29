@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="1.0.0-1"
+script_version="1.0.0-2"
 
 #=============================================================================
 ### Can be modified
@@ -84,7 +84,7 @@ displayandexec() {
 
 # Function: backup
 backup() {
-  displayandexec "Compress and archive" tar zcvf $BACKUP_FILE /etc/shinken
+  displayandexec "Archive current configuration" tar zcvf $BACKUP_FILE /etc/shinken
 }
 
 # Function: installation
@@ -129,7 +129,14 @@ installation() {
   cd $TEMP_FOLDER
   displayandexec "Untar Shinken v$shinken_version" tar zxvf shinken-$shinken_version.tar.gz
   cd shinken-$shinken_version
-  displayandexec "Install Shinken v$shinken_version" python setup.py install --install-scripts=/usr/bin/
+  # displayandexec "Install Shinken v$shinken_version" python setup.py install --install-scripts=/usr/bin/
+  if [ -e /etc/init.d/shinken ]
+  then
+    displayandexec "Backup current plugins and data" ./install -b
+    displayandexec "Update Shinken v$shinken_version" ./install -u
+  else
+    displayandexec "Install Shinken v$shinken_version" ./install -i
+  fi
   cp libexec/* /usr/lib/nagios/plugins/
   cd $TEMP_FOLDER
   displayandexec "Untar Thruk v$thruk_version for $arch_version" tar zxvf Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
@@ -161,7 +168,7 @@ installation() {
   displayandexec "Install Shinken startup script" update-rc.d shinken defaults
   displayandexec "Install Thruk startup script" update-rc.d thruk defaults
 
-  rm -rf $TEMP_FOLDER
+  # rm -rf $TEMP_FOLDER
 }
 
 # Fonction: Verifie si les fichiers de conf sont OK
