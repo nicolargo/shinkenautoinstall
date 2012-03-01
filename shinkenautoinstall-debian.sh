@@ -8,7 +8,7 @@
 # Syntaxe: root> ./shinkenautoinstall-debian.sh
 #
 #
-script_version="1.0.0-3"
+script_version="1.0.0-4"
 
 #=============================================================================
 ### Can be modified
@@ -101,9 +101,7 @@ installation() {
   displayandexec "Update the system" $CMD_APT update
 
   # Pre-requisite
-  # python-dev python-setuptools pyro wget libgd2-xpm-dev
-  # multiprocessing version $multiprocessing_version
-  displayandexec "Install wget and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev
+  displayandexec "Install wget and librairies" $CMD_APT install python-dev python-setuptools pyro wget libgd2-xpm-dev lsb-release
   cd $TEMP_FOLDER
   displayandexec "Download Multiprocessing v$multiprocessing_version" wget http://pypi.python.org/packages/source/m/multiprocessing/multiprocessing-$multiprocessing_version.tar.gz
   displayandexec "Untar Multiprocessing v$multiprocessing_version"  tar zxvf multiprocessing-$multiprocessing_version.tar.gz
