@@ -116,7 +116,7 @@ installation() {
 
   # Download sources
   cd $TEMP_FOLDER
-  displayandexec "Download Shinken version $shinken_version" wget http://shinken-monitoring.org/pub/shinken-$shinken_version.tar.gz
+  displayandexec "Download Shinken version $shinken_version" wget http://www.shinken-monitoring.org/pub/shinken-$shinken_version.tar.gz
   displayandexec "Download Thruk version $thruk_version" wget http://www.thruk.org/files/archive/Thruk-$thruk_version-$arch_version-linux-gnu-thread-multi-$perl_version.tar.gz
 
   # Create shinken user and group
